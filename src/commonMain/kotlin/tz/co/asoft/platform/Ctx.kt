@@ -1,3 +1,3 @@
 package tz.co.asoft.platform
 
-expect class Ctx
+expect abstract class Ctx

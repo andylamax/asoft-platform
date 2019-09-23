@@ -1,3 +1,5 @@
 package tz.co.asoft.platform
 
-actual typealias Ctx = Any
+import android.content.Context
+
+actual typealias Ctx = Context

@@ -1,3 +1,3 @@
 package tz.co.asoft.platform
 
-actual typealias Ctx = Any
+actual abstract class Ctx
