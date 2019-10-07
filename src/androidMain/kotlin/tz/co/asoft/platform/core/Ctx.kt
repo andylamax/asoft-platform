@@ -1,4 +1,4 @@
-package tz.co.asoft.platform
+package tz.co.asoft.platform.core
 
 import android.content.Context
 import android.widget.Toast

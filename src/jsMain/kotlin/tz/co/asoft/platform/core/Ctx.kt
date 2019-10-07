@@ -1,4 +1,4 @@
-package tz.co.asoft.platform
+package tz.co.asoft.platform.core
 
 import kotlin.browser.window
 
