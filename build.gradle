@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'tz.co.asoft'
-version '3.0.0'
+version '3.1.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
@@ -77,14 +77,14 @@ kotlin {
     }
 
     js() {
-        browser {
-            testTask {
-                useKarma {
-                    useChrome()
-                }
-            }
-        }
-        nodejs()
+//        browser {
+//            testTask {
+//                useKarma {
+//                    useChrome()
+//                }
+//            }
+//        }
+//        nodejs()
         compilations.all {
             tasks[compileKotlinTaskName].kotlinOptions {
                 kotlinOptions.metaInfo = true
@@ -115,7 +115,7 @@ kotlin {
 
         jvmMain {
             dependencies {
-                implementation kotlin('stdlib-jdk8')
+                implementation kotlin('stdlib')
             }
         }
 
@@ -128,7 +128,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation kotlin('stdlib-jdk8')
+                implementation kotlin('stdlib')
                 api "androidx.appcompat:appcompat:$androidx_appcompat_version"
             }
         }
