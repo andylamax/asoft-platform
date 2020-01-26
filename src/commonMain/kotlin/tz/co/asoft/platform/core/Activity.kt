@@ -1,3 +1,3 @@
 package tz.co.asoft.platform.core
 
-expect class Activity
+expect open class Activity
