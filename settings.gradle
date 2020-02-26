@@ -18,7 +18,7 @@ pluginManagement {
 
 rootProject.name = 'asoft-platform'
 
-include ":samples:jvm-sample"
-include ":samples:android-sample"
-include ":samples:js-sample"
+//include ":samples:jvm-sample"
+//include ":samples:android-sample"
+//include ":samples:js-sample"
 
