@@ -1,0 +1,157 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "http://storage.googleapis.com/r8-releases/raw/master"
+        }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$android_tools_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id 'kotlin-multiplatform'
+}
+
+apply plugin: 'com.android.application'
+apply from: "../environment.gradle"
+
+repositories {
+    google()
+    jcenter()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
+    maven { url 'https://dl.bintray.com/kotlinx/kotlinx' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled false
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/androidMain/kotlin']
+            manifest.srcFile "src/androidMain/AndroidManifest.xml"
+            assets.srcDirs = ["src/androidMain/assets"]
+            res.srcDirs = ["src/androidMain/resources"]
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        staging {
+            initWith buildTypes.debug
+            applicationIdSuffix ".staging"
+            matchingFallbacks = ['debug']
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            initWith buildTypes.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/**'
+        exclude '**/*.js'
+        exclude '**/*.js.map'
+        exclude '**/*.kjsm'
+        exclude '**/*.kotlin_metadata'
+        exclude '**/*.kotlin_builtins'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "5g"
+        preDexLibraries false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+environments {
+    debug {
+
+    }
+
+    staging {
+
+    }
+
+    release {
+
+    }
+}
+
+kotlin {
+    android("android") {
+        compilations.all {
+            tasks[compileKotlinTaskName].kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(":")
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation kotlin('stdlib')
+            }
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'androidx.cardview') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '1.0.0'
+            }
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force 'androidx.recyclerview:recyclerview:1.0.0'
+    resolutionStrategy.force 'com.google.firebase:firebase-core:17.0.0'
+}
+
+//project.afterEvaluate {
+//    android.applicationVariants.all { variant ->
+//        task "installRun${variant.name.capitalize()}"(type: Exec, dependsOn: "install${variant.name.capitalize()}", group: "run") {
+//            commandLine = ["adb", "shell", "monkey", "-p", variant.applicationId + " 1"]
+//            doLast {
+//                println "Launching ${variant.applicationId}"
+//            }
+//        }
+//    }
+//}
