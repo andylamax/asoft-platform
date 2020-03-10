@@ -1,3 +1,3 @@
 package tz.co.asoft.platform.core
 
-actual typealias Activity = android.app.Activity
+actual typealias Activity = androidx.core.app.ComponentActivity
