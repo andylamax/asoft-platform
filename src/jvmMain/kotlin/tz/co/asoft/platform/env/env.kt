@@ -6,7 +6,7 @@ actual fun Ctx.env() = getEnv()
 
 fun env() = getEnv()
 
-private val error = Throwable("Can't location platform.environment.json file")
+private val error = Throwable("Can't locate platform.environment.json file")
 
 fun getEnv(): Map<String, Any> {
     val classLoader = ClassLoader.getSystemClassLoader()

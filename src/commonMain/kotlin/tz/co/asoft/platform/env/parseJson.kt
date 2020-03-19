@@ -2,7 +2,7 @@ package tz.co.asoft.platform.env
 
 import kotlinx.serialization.json.*
 
-fun String.toJsonObject(): JsonObject = Json.parse(JsonObject.serializer(), this)
+fun String.toJsonObject(): JsonObject = Json.parse(JsonObjectSerializer, this)
 
 
 fun JsonElement.toKObject(): Any? = when (this) {
