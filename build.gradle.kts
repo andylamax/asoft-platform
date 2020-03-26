@@ -1,15 +1,15 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
-    kotlin("multiplatform") version "1.3.70"
+    kotlin("multiplatform") version "1.4-M1"
     kotlin("plugin.serialization") version "1.3.70"
     id("com.android.library") version "3.6.0"
     id("maven-publish")
 }
 
 object versions {
-    val asoft_test = "4.2.1"
-    val serialization = "0.20.0"
+    val asoft_test = "4.2.1-1.4-M1"
+    val serialization = "0.20.0-1.4-M1"
     val androidx_appcompat = "1.1.0"
 }
 
@@ -20,12 +20,13 @@ fun andylamax(lib: String, platform: String, ver: String): String {
 fun asoftTest(platform: String) = andylamax("asoft-test", platform, versions.asoft_test)
 
 group = "tz.co.asoft"
-version = "3.2.3"
+version = "3.2.3-1.4-M1"
 
 repositories {
     google()
     jcenter()
     maven(url = "https://jitpack.io")
+    maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 android {

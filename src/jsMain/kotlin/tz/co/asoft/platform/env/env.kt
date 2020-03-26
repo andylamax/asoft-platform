@@ -12,4 +12,5 @@ private fun getEnv() = platformEnvironment.toJsonObject().toMap()
 private fun <T> T.toJsonObject(): JsonObject = JSON.stringify(this).toJsonObject()
 
 @JsModule("platform.environment.json")
+@JsNonModule
 internal external val platformEnvironment: Any
