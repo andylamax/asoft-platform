@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-
 plugins {
     kotlin("multiplatform") version "1.4-M1"
     kotlin("plugin.serialization") version "1.3.70"
@@ -7,20 +5,8 @@ plugins {
     id("maven-publish")
 }
 
-object versions {
-    val asoft_test = "4.2.1-1.4-M1"
-    val serialization = "0.20.0-1.4-M1"
-    val androidx_appcompat = "1.1.0"
-}
-
-fun andylamax(lib: String, platform: String, ver: String): String {
-    return "com.github.andylamax.$lib:$lib-$platform:$ver"
-}
-
-fun asoftTest(platform: String) = andylamax("asoft-test", platform, versions.asoft_test)
-
 group = "tz.co.asoft"
-version = "3.2.3-1.4-M1"
+version = rootProject.version
 
 repositories {
     google()
@@ -88,7 +74,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${versions.serialization}")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${versions.kotlinx.serialization}")
             }
         }
 
@@ -101,8 +87,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${versions.serialization}")
-                api("androidx.appcompat:appcompat:${versions.androidx_appcompat}")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${versions.kotlinx.serialization}")
+                api("androidx.appcompat:appcompat:${versions.androidx.appcompat}")
             }
         }
 
@@ -115,7 +101,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${versions.serialization}")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${versions.kotlinx.serialization}")
             }
         }
 
@@ -127,7 +113,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
-                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:${versions.serialization}")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:${versions.kotlinx.serialization}")
             }
         }
         val jsTest by getting {
